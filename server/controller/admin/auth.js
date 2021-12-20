@@ -16,7 +16,7 @@ exports.register = async (req, res) => {
   });
   try {
     const savedUser = await newUser.save();
-    res.status(201).json(savedUser);
+    res.status(201).json({ savedUser, message: "Admin Created Successfully" });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -40,11 +40,23 @@ exports.login = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "3d" }
     );
-
+    res.cookie("token", accessToken, { expiresIn: "3d" });
     const fullName = user.firstName + " " + user.lastName;
     const { userPassword, ...others } = user._doc;
-    res.status(200).json({ fullName, ...others, accessToken });
+    res.status(200).json({
+      fullName,
+      ...others,
+      accessToken,
+      message: "Admin Login Successful",
+    });
   } catch (err) {
     res.status(500).json(err);
   }
+};
+
+exports.logout = async (req, res) => {
+  res.clearCookie("token");
+  res.status(200).json({
+    message: "Logout Successfully",
+  });
 };

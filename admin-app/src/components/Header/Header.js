@@ -1,11 +1,55 @@
 import React from "react";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import { NavLink, Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { signout } from "../../redux/actions/auth.actions";
 function Header() {
+  const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const logout = () => {
+    dispatch(signout());
+  };
+  const renderLogedinLinks = () => {
+    return (
+      <Nav>
+        {/* <Nav.Link href="#deets">Login</Nav.Link> */}
+        <li className="nav-item">
+          <NavLink to="/login" className="nav-link" onClick={logout}>
+            Signout
+          </NavLink>
+        </li>
+      </Nav>
+    );
+  };
+
+  const renderLoginLinks = () => {
+    return (
+      <Nav>
+        {/* <Nav.Link href="#deets">Login</Nav.Link> */}
+        <li className="nav-item">
+          <NavLink to="/login" className="nav-link">
+            Login
+          </NavLink>
+        </li>
+
+        <li className="nav-item">
+          <NavLink to="/register" className="nav-link">
+            Register
+          </NavLink>
+        </li>
+      </Nav>
+    );
+  };
   return (
     <div>
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Container>
+      <Navbar
+        collapseOnSelect
+        expand="lg"
+        bg="dark"
+        variant="dark"
+        style={{ zIndex: 1 }}
+      >
+        <Container fluid>
           <Navbar.Brand as={Link} to="/">
             Admin Dashboard
           </Navbar.Brand>
@@ -28,20 +72,7 @@ function Header() {
                 </NavDropdown.Item>
               </NavDropdown> */}
             </Nav>
-            <Nav>
-              {/* <Nav.Link href="#deets">Login</Nav.Link> */}
-              <li className="nav-item">
-                <NavLink to="/login" className="nav-link">
-                  Login
-                </NavLink>
-              </li>
-
-              <li className="nav-item">
-                <NavLink to="/register" className="nav-link">
-                  Register
-                </NavLink>
-              </li>
-            </Nav>
+            {auth.authenticate ? renderLogedinLinks() : renderLoginLinks()}
           </Navbar.Collapse>
         </Container>
       </Navbar>
