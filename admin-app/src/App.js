@@ -5,18 +5,25 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { PrivateRoute } from "./HOC/PrivateRoute";
-import { isUserLoggedIn } from "./redux/actions";
+import {
+  isUserLoggedIn,
+  getAllCategory,
+  getAllInitialData,
+} from "./redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import ProductsPage from "./pages/ProductsPage";
 import OrdersPage from "./pages/OrdersPage";
+import CategoryPage from "./pages/CategoryPage";
 
 function App() {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
+
   useEffect(() => {
     if (!auth.authenticat) {
       dispatch(isUserLoggedIn());
     }
+    dispatch(getAllInitialData());
   }, []);
   return (
     <div className="App">
@@ -26,6 +33,14 @@ function App() {
           element={
             <PrivateRoute>
               <Home />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/category"
+          element={
+            <PrivateRoute>
+              <CategoryPage />
             </PrivateRoute>
           }
         />

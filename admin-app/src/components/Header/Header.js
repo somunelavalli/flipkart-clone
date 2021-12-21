@@ -43,6 +43,7 @@ function Header() {
   return (
     <div>
       <Navbar
+        fixed="top"
         collapseOnSelect
         expand="lg"
         bg="dark"

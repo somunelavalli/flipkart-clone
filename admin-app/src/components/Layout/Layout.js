@@ -15,6 +15,9 @@ function Layout(props) {
                 <NavLink to="/">Dashboard</NavLink>
               </li>
               <li>
+                <NavLink to="/category">Category</NavLink>
+              </li>
+              <li>
                 <NavLink to="/products">Products</NavLink>
               </li>
               <li>
@@ -22,7 +25,9 @@ function Layout(props) {
               </li>
             </ul>
           </Col>
-          <Col md={10}>{props.children}</Col>
+          <Col md={10} style={{ marginLeft: "auto", paddingTop: "60px" }}>
+            {props.children}
+          </Col>
         </Row>
       ) : (
         props.children
