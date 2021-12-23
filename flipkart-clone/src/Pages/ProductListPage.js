@@ -16,6 +16,8 @@ function ProductListPage(props) {
     above20k: 20001,
   });
 
+  // console.log(priceRange["under5k"]);
+  // console.log(product.productsByPrice);
   useEffect(() => {
     dispatch(getProductsBySlug(slug));
   }, []);
@@ -25,7 +27,9 @@ function ProductListPage(props) {
         return (
           <div className="card">
             <div className="cardHeader">
-              <div>{slug} Mobiles Under 10k</div>
+              <div>
+                {slug} Mobiles {key} {priceRange.key}
+              </div>
               <button>View All</button>
             </div>
             <div style={{ display: "flex" }}>
