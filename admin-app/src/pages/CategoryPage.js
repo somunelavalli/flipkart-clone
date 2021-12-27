@@ -78,6 +78,7 @@ function CategoryPage() {
         value: category._id,
         name: category.name,
         parentId: category.parentId,
+        type: category.type,
       });
       if (category.children.length > 0) {
         createCategoryList(category.children, options);
@@ -150,11 +151,7 @@ function CategoryPage() {
       form.append("type", item.type);
     });
 
-    dispatch(updateCategories(form)).then((result) => {
-      if (result) {
-        dispatch(getAllCategory());
-      }
-    });
+    dispatch(updateCategories(form));
 
     setUpdateCategoryModal(false);
   };
@@ -180,6 +177,7 @@ function CategoryPage() {
         }
       });
     }
+    setDeleteCategoryModal(false);
   };
   const categoryList = createCategoryList(category.categories);
 

@@ -63,7 +63,13 @@ const UpdateCategoriesModal = (props) => {
               </select>
             </Col>
             <Col>
-              <select className="form-control">
+              <select
+                className="form-control"
+                value={item.type}
+                onChange={(e) =>
+                  handleCategoryInput("type", e.target.value, index, "expanded")
+                }
+              >
                 <option value="">Select Value</option>
                 <option value="Store">Store</option>
                 <option value="Product">Product</option>
@@ -107,7 +113,13 @@ const UpdateCategoriesModal = (props) => {
               </select>
             </Col>
             <Col>
-              <select className="form-control">
+              <select
+                className="form-control"
+                value={item.type}
+                onChange={(e) =>
+                  handleCategoryInput("type", e.target.value, index, "checked")
+                }
+              >
                 <option value="">Select Value</option>
                 <option value="Store">Store</option>
                 <option value="Product">Product</option>
