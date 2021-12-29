@@ -21,11 +21,13 @@ function App() {
   const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (!auth.authenticat) {
+    if (!auth.authenticate) {
       dispatch(isUserLoggedIn());
     }
-    dispatch(getAllInitialData());
-  }, []);
+    if (auth.authenticate) {
+      dispatch(getAllInitialData());
+    }
+  }, [auth.authenticate]);
   return (
     <div className="App">
       <Routes>

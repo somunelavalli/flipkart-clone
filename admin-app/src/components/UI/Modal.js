@@ -16,7 +16,7 @@ const newModal = (props) => {
             </Button>
           ))
         ) : (
-          <Button variant="primary" onClick={props.handleClose}>
+          <Button variant="primary" onClick={props.onSubmit}>
             {props.actionName}
           </Button>
         )}

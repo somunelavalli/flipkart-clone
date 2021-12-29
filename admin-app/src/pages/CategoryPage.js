@@ -40,13 +40,19 @@ function CategoryPage() {
   const [deleteCategoryModal, setDeleteCategoryModal] = useState(false);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (!category.loading) {
+      setShow(false);
+    }
+  }, [category.loading]);
+
   const handleClose = () => {
     const form = new FormData();
-    // const cat = {
-    //   categoryName,
-    //   parentCategoryId,
-    //   categoryImage,
-    // };
+    if (categoryName === "") {
+      alert("Category Name is Required");
+      setShow(false);
+      return;
+    }
 
     form.append("name", categoryName);
     form.append("parentId", parentCategoryId);
@@ -232,7 +238,8 @@ function CategoryPage() {
       </Container>
       <AddCategoryModal
         show={show}
-        handleClose={handleClose}
+        handleClose={() => setShow(false)}
+        onSubmit={handleClose}
         modalTitle={"Add New Category"}
         actionName={"Add Category"}
         categoryName={categoryName}
@@ -244,7 +251,8 @@ function CategoryPage() {
       />
       <UpdateCategoriesModal
         show={updateCategoryModal}
-        handleClose={updateCategoriesForm}
+        handleClose={() => setUpdateCategoryModal(false)}
+        onSubmit={updateCategoriesForm}
         modalTitle={"Update Category"}
         actionName={"Save Changes"}
         size={"lg"}
