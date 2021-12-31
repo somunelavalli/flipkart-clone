@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { getProductsBySlug } from "../redux/actions";
 import "./style.css";
 import { generatePublicurl } from "../urlConfig";
+import { Link } from "react-router-dom";
+import Card from "../Components/Card";
 
 function ProductStore() {
   const { slug } = useParams();
@@ -24,16 +26,21 @@ function ProductStore() {
     <>
       {Object.keys(product.productsByPrice).map((key, index) => {
         return (
-          <div className="card">
-            <div className="cardHeader">
-              <div>
-                {slug} Mobiles under {priceRange[key]}
-              </div>
-              <button>View All</button>
-            </div>
+          <Card
+            headerLeft={`${slug} Mobiles under ${priceRange[key]}`}
+            headerRight={<button>View All</button>}
+            style={{
+              width: "calc(100% - 40px)",
+              margin: "20px",
+            }}
+          >
             <div style={{ display: "flex" }}>
               {product.productsByPrice[key].map((product) => (
-                <div className="productContainet">
+                <Link
+                  to={`/${product.slug}/${product._id}/p`}
+                  style={{ display: "block" }}
+                  className="productContainet"
+                >
                   <div className="productImageContainer">
                     <img
                       src={generatePublicurl(product.productPictures[0].img)}
@@ -48,10 +55,10 @@ function ProductStore() {
                     </div>
                     <div className="productPrice">{product.price}</div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
-          </div>
+          </Card>
         );
       })}
     </>

@@ -1,5 +1,6 @@
 const router = require("express").Router();
-const { register, login } = require("../controller/auth");
+const { requireSignin } = require("../common-middleware");
+const { register, login, logout } = require("../controller/auth");
 const {
   validateSignupRequest,
   validateSigninRequest,
@@ -11,5 +12,8 @@ router.post("/register", validateSignupRequest, isRequestValidated, register);
 
 //Login
 router.post("/login", validateSigninRequest, isRequestValidated, login);
+
+//Logout
+router.post("/logout", requireSignin, logout);
 
 module.exports = router;

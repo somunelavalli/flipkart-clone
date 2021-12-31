@@ -34,17 +34,28 @@ exports.login = async (req, res) => {
     const dbpassword = hashedpassword.toString(cryptoJs.enc.Utf8);
     dbpassword !== req.body.userPassword &&
       res.status(401).json("wrong credentials");
-    const accessToken = jwt.sign(
-      { id: user._id, role: user.role },
-      process.env.JWT_SECRET,
-      {
-        expiresIn: "3d",
-      }
-    );
-    const fullName = user.firstName + " " + user.lastName;
-    const { userPassword, ...others } = user._doc;
-    res.status(200).json({ fullName, ...others, accessToken });
+    if (user.role === "user") {
+      const accessToken = jwt.sign(
+        { id: user._id, role: user.role },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "3d",
+        }
+      );
+      const fullName = user.firstName + " " + user.lastName;
+      const { userPassword, ...others } = user._doc;
+      res.status(200).json({ fullName, ...others, accessToken });
+    } else {
+      res.status(400).json({ message: "Something Went Wrong" });
+    }
   } catch (err) {
     res.status(500).json(err);
   }
+};
+
+exports.logout = async (req, res) => {
+  res.clearCookie("token");
+  res.status(200).json({
+    message: "Logout Successfully",
+  });
 };

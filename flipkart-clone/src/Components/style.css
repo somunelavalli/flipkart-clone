@@ -83,7 +83,8 @@
   font-size: 16px;
   cursor: pointer;
 }
-.more {
+.more,
+.fullName {
   font-weight: bold;
   color: #fff;
   display: flex;
@@ -202,4 +203,11 @@
   background-color: #fff;
   border: 1px solid #cecece;
   box-shadow: 0 0 2px 2px #cecece;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 20px;
+  border-bottom: 1px solid #cecece;
 }

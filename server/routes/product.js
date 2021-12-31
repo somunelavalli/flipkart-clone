@@ -1,6 +1,10 @@
 const router = require("express").Router();
 const { requireSignin, adminMiddleware } = require("../common-middleware");
-const { addProduct, getProductsBySlug } = require("../controller/product");
+const {
+  addProduct,
+  getProductsBySlug,
+  getProductDetailsById,
+} = require("../controller/product");
 const multer = require("multer");
 const shortid = require("shortid");
 const path = require("path");
@@ -23,5 +27,6 @@ router.post(
   addProduct
 );
 router.get("/getproducts/:slug", getProductsBySlug);
+router.get("/:productId", getProductDetailsById);
 
 module.exports = router;
