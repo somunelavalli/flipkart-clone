@@ -91,7 +91,8 @@ function ProductsPage(props) {
     return (
       <Modal
         show={show}
-        handleClose={handleClose}
+        handleClose={() => setShow(false)}
+        onSubmit={handleClose}
         modalTitle={"Add New Product"}
         actionName={"Add Product"}
       >
