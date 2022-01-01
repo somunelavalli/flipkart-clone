@@ -7,6 +7,7 @@ import { isUserLoggedIn, updateCart } from "./redux/actions";
 import { useEffect } from "react";
 import ProductDetailsPage from "./Pages/ProductDetailsPage";
 import CartPage from "./Pages/CartPage";
+import CheckoutPage from "./Pages/CheckoutPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ function App() {
             path="/:productSlug/:productId/p"
             element={<ProductDetailsPage />}
           />
+          <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/:slug" element={<ProductListPage />} />
         </Routes>
       </Router>

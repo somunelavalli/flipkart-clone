@@ -11,7 +11,7 @@ import {
   DropdownMenu,
 } from "./MaterialUI";
 import { login, signout } from "../redux/actions";
-
+import { Link } from "react-router-dom";
 /**
  * @author
  * @function Header
@@ -93,7 +93,7 @@ const Header = (props) => {
               <h2>Login</h2>
               <p>Get access to your Orders, Wishlist and Recommendations</p>
             </div>
-            <div className="rightspace">
+            <div className="loginInputContainer rightspace">
               <MaterialInput
                 type="text"
                 label="Enter Email/Enter Mobile Number"
@@ -118,7 +118,7 @@ const Header = (props) => {
                 onClick={userLogin}
               />
 
-              <p>Or</p>
+              <p style={{ textAlign: "center" }}>Or</p>
 
               <MaterialButton
                 title="Request OTP"
@@ -180,10 +180,12 @@ const Header = (props) => {
             ]}
           />
           <div>
-            <a className="cart">
-              <IoIosCart />
-              <span style={{ margin: "0 10px" }}>Cart</span>
-            </a>
+            <Link to={"/cart"}>
+              <a className="cart">
+                <IoIosCart />
+                <span style={{ margin: "0 10px" }}>Cart</span>
+              </a>
+            </Link>
           </div>
         </div>
       </div>
