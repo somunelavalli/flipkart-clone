@@ -275,3 +275,148 @@
   padding: 0 0 20px 60px;
   font-size: 12px;
 }
+.orderItemContainer {
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+}
+.orderImgContainer {
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  text-align: center;
+}
+.orderImg {
+  max-width: 80px;
+  max-height: 80px;
+}
+.orderRow {
+  display: flex;
+  flex: 1;
+}
+.orderName {
+  width: 300px;
+  box-sizing: border-box;
+  padding: 0 20px;
+  font-size: 12px;
+}
+.orderPrice {
+  box-sizing: border-box;
+  padding: 0 40px;
+  display: flex;
+  align-items: flex-start;
+  font-size: 14px;
+}
+.caContainer {
+  width: 250px;
+}
+.caImgContainer {
+  width: 240px;
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+}
+.caImgContainer > img {
+  max-width: 100%;
+  max-height: 300px;
+}
+.caProductName {
+  font-size: 12px;
+  padding: 10px 0;
+}
+.caProductPrice {
+  font-size: 12px;
+  font-weight: 600;
+}
+.delAdrContainer {
+  display: flex;
+  box-sizing: border-box;
+}
+.delTitle {
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.delName {
+  font-size: 12px;
+  font-weight: 500;
+}
+.delAddress {
+  font-size: 12px;
+  margin: 10px 0;
+}
+.delPhoneNumber {
+  font-size: 12px;
+  font-weight: 500;
+}
+.delAdrDetails {
+  padding: 20px;
+  border-right: 1px solid #eee;
+}
+.delMoreActionContainer {
+  padding: 20px;
+}
+
+.delItemImgContainer {
+  width: 75px;
+  height: 75px;
+  overflow: hidden;
+  text-align: center;
+}
+.delItemImgContainer > img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.orderTrack {
+  width: 400px;
+  display: flex;
+}
+.orderStatus {
+  width: 33.33%;
+  height: 3px;
+  background: #777;
+  position: relative;
+  font-size: 12px;
+}
+.orderStatus.active {
+  background: #26a541;
+}
+.orderStatus:last-child {
+  width: 0;
+}
+.orderStatus .point {
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  border-radius: 5px;
+  background-color: #777;
+  top: -3px;
+}
+.orderStatus .point.active {
+  background-color: #26a541;
+}
+.orderInfo {
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: absolute;
+  top: -26px;
+  transform: translateX(-50%);
+}
+
+.delItemName {
+  font-size: 12px;
+}
+
+.orderInfo .status {
+  color: #26a541;
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+.orderInfo .date {
+  font-size: 10px;
+}

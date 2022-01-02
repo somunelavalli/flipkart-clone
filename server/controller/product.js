@@ -38,7 +38,7 @@ exports.addProduct = async (req, res) => {
 exports.getProductsBySlug = async (req, res) => {
   const { slug } = req.params;
   await Category.findOne({ slug: slug })
-    .select("_id")
+    .select("_id type")
     .exec(async (error, category) => {
       if (error) {
         return res.status(400).json({ error });
@@ -49,20 +49,35 @@ exports.getProductsBySlug = async (req, res) => {
             if (error) {
               return res.status(400).json({ error });
             }
-            if (products.length > 0) {
-              res.status(200).json({
-                products,
-                productsByPrice: {
-                  under5K: products.filter((product) => product.price <= 5000),
-                  under10K: products.filter(
-                    (product) => product.price > 5000 && product.price <= 10000
-                  ),
-                  under20K: products.filter(
-                    (product) => product.price > 10000 && product.price <= 20000
-                  ),
-                  above20K: products.filter((product) => product.price > 20000),
-                },
-              });
+            console.log(category.type);
+            if (category.type) {
+              if (products.length > 0) {
+                res.status(200).json({
+                  products,
+                  priceRange: {
+                    under5k: 5000,
+                    under10k: 10000,
+                    under20k: 20000,
+                    above20k: 20001,
+                  },
+                  productsByPrice: {
+                    under5K: products.filter(
+                      (product) => product.price <= 5000
+                    ),
+                    under10K: products.filter(
+                      (product) =>
+                        product.price > 5000 && product.price <= 10000
+                    ),
+                    under20K: products.filter(
+                      (product) =>
+                        product.price > 10000 && product.price <= 20000
+                    ),
+                    above20K: products.filter(
+                      (product) => product.price > 20000
+                    ),
+                  },
+                });
+              }
             }
           }
         );

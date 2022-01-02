@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAddress, getCartItems } from "../redux/actions";
+import { addOrder, getAddress, getCartItems } from "../redux/actions";
 import Layout from "../Components/Layout";
 import {
   Anchor,
@@ -138,37 +138,37 @@ const CheckoutPage = (props) => {
     setAddress(updatedAddress);
   };
 
-  //   const userOrderConfirmation = () => {
-  //     setOrderConfirmation(true);
-  //     setOrderSummary(false);
-  //     setPaymentOption(true);
-  //   };
+  const userOrderConfirmation = () => {
+    setOrderConfirmation(true);
+    setOrderSummary(false);
+    setPaymentOption(true);
+  };
 
-  //   const onConfirmOrder = () => {
-  //     const totalAmount = Object.keys(cart.cartItems).reduce(
-  //       (totalPrice, key) => {
-  //         const { price, qty } = cart.cartItems[key];
-  //         return totalPrice + price * qty;
-  //       },
-  //       0
-  //     );
-  //     const items = Object.keys(cart.cartItems).map((key) => ({
-  //       productId: key,
-  //       payablePrice: cart.cartItems[key].price,
-  //       purchasedQty: cart.cartItems[key].qty,
-  //     }));
-  //     const payload = {
-  //       addressId: selectedAddress._id,
-  //       totalAmount,
-  //       items,
-  //       paymentStatus: "pending",
-  //       paymentType: "cod",
-  //     };
+  const onConfirmOrder = () => {
+    const totalAmount = Object.keys(cart.cartItems).reduce(
+      (totalPrice, key) => {
+        const { price, qty } = cart.cartItems[key];
+        return totalPrice + price * qty;
+      },
+      0
+    );
+    const items = Object.keys(cart.cartItems).map((key) => ({
+      productId: key,
+      payablePrice: cart.cartItems[key].price,
+      purchasedQty: cart.cartItems[key].qty,
+    }));
+    const payload = {
+      addressId: selectedAddress._id,
+      totalAmount,
+      items,
+      paymentStatus: "pending",
+      paymentType: "cod",
+    };
 
-  //     console.log(payload);
-  //     dispatch(addOrder(payload));
-  //     setConfirmOrder(true);
-  //   };
+    console.log(payload);
+    dispatch(addOrder(payload));
+    setConfirmOrder(true);
+  };
 
   useEffect(() => {
     auth.authenticate && dispatch(getAddress());
@@ -282,7 +282,7 @@ const CheckoutPage = (props) => {
                 </p>
                 <MaterialButton
                   title="CONTINUE"
-                  //   onClick={userOrderConfirmation}
+                  onClick={userOrderConfirmation}
                   style={{
                     width: "200px",
                   }}
@@ -310,7 +310,7 @@ const CheckoutPage = (props) => {
                   </div>
                   <MaterialButton
                     title="CONFIRM ORDER"
-                    // onClick={onConfirmOrder}
+                    onClick={onConfirmOrder}
                     style={{
                       width: "200px",
                       margin: "0 0 20px 20px",

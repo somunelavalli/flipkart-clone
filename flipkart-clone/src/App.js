@@ -8,6 +8,8 @@ import { useEffect } from "react";
 import ProductDetailsPage from "./Pages/ProductDetailsPage";
 import CartPage from "./Pages/CartPage";
 import CheckoutPage from "./Pages/CheckoutPage";
+import OrderPage from "./Pages/OrderPage";
+import OrderDetailsPage from "./Pages/OrderDetailsPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -32,6 +34,11 @@ function App() {
             element={<ProductDetailsPage />}
           />
           <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/account/orders" element={<OrderPage />} />
+          <Route
+            path="/order_details/:orderId"
+            element={<OrderDetailsPage />}
+          />
           <Route path="/:slug" element={<ProductListPage />} />
         </Routes>
       </Router>

@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import "./style.css";
 import getParams from "../utils/getParams";
 import ProductPage from "./ProductPage";
+import ClothingAndAccessories from "./ClothingAndAccessories";
 function ProductListPage(props) {
   const { search } = useLocation();
   const renderProducts = () => {
@@ -19,7 +20,7 @@ function ProductListPage(props) {
         content = <ProductPage {...props} />;
         break;
       default:
-        content = null;
+        content = <ClothingAndAccessories {...props} />;
     }
     return content;
   };
