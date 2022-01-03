@@ -3,7 +3,7 @@ import Layout from "../components/Layout/Layout";
 import { Container, Row, Col, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Input from "../components/UI/Input";
-import { addProduct } from "../redux/actions";
+import { addProduct, deleteProductById } from "../redux/actions";
 import Modal from "../components/UI/Modal";
 import "./Home.css";
 import { generatePublicurl } from "../urlConfig";
@@ -63,7 +63,7 @@ function ProductsPage(props) {
             <th>Price</th>
             <th>Quantity</th>
             <th>Category</th>
-            <th>Created By</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -78,7 +78,22 @@ function ProductsPage(props) {
                   <td>{product.price}</td>
                   <td>{product.quantity}</td>
                   <td>{product.category.name}</td>
-                  <td>{product.createdBy}</td>
+                  {/* <td>{product.createdBy}</td> */}
+                  <td>
+                    <button onClick={() => showProductDetailsModal(product)}>
+                      info
+                    </button>
+                    <button
+                      onClick={() => {
+                        const payload = {
+                          productId: product._id,
+                        };
+                        dispatch(deleteProductById(payload));
+                      }}
+                    >
+                      del
+                    </button>
+                  </td>
                 </tr>
               ))
             : null}

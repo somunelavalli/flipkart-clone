@@ -11,6 +11,7 @@ import PriceDetails from "../Components/PriceDetails";
 import Card from "../Components/Card";
 import CartPage from "./CartPage";
 import AddressForm from "./AddressForm";
+import { useNavigate } from "react-router-dom";
 
 import "./style.css";
 
@@ -108,7 +109,7 @@ const CheckoutPage = (props) => {
   const [confirmOrder, setConfirmOrder] = useState(false);
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const onAddressSubmit = (addr) => {
     setSelectedAddress(addr);
     setConfirmAddress(true);
@@ -185,11 +186,11 @@ const CheckoutPage = (props) => {
     //user.address.length === 0 && setNewAddress(true);
   }, [user.address]);
 
-  //   useEffect(() => {
-  //     if (confirmOrder && user.placedOrderId) {
-  //       props.history.push(`/order_details/${user.placedOrderId}`);
-  //     }
-  //   }, [user.placedOrderId]);
+  useEffect(() => {
+    if (confirmOrder && user.placedOrderId) {
+      navigate(`/order_details/${user.placedOrderId}`);
+    }
+  }, [user.placedOrderId]);
 
   return (
     <Layout>

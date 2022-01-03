@@ -4,6 +4,8 @@ const {
   addProduct,
   getProductsBySlug,
   getProductDetailsById,
+  deleteProductById,
+  getProducts,
 } = require("../controller/product");
 const multer = require("multer");
 const shortid = require("shortid");
@@ -28,5 +30,11 @@ router.post(
 );
 router.get("/getproducts/:slug", getProductsBySlug);
 router.get("/:productId", getProductDetailsById);
-
+router.delete(
+  "/deleteproductbyid",
+  requireSignin,
+  adminMiddleware,
+  deleteProductById
+);
+router.post("/getproducts", requireSignin, adminMiddleware, getProducts);
 module.exports = router;

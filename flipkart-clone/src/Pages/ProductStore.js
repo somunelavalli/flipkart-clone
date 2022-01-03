@@ -6,17 +6,23 @@ import "./style.css";
 import { generatePublicurl } from "../urlConfig";
 import { Link } from "react-router-dom";
 import Card from "../Components/Card";
+import Price from "../Components/Price";
+import Rating from "../Components/Rating";
+import { MaterialButton } from "../Components/MaterialUI";
 
 function ProductStore() {
   const { slug } = useParams();
   const product = useSelector((state) => state.product);
+  const priceRange = product.priceRange;
+  console.log(product);
+  console.log(priceRange);
   const dispatch = useDispatch();
-  const [priceRange, setPriceRange] = useState({
-    under5k: 5000,
-    under10k: 10000,
-    under20k: 20000,
-    above20k: 20001,
-  });
+  // const [priceRange, setPriceRange] = useState({
+  //   under5k: 5000,
+  //   under10k: 10000,
+  //   under20k: 20000,
+  //   above20k: 20001,
+  // });
   //   console.log(priceRange["under5k"]);
   //   console.log(product.productsByPrice);
   useEffect(() => {
@@ -28,7 +34,17 @@ function ProductStore() {
         return (
           <Card
             headerLeft={`${slug} Mobiles under ${priceRange[key]}`}
-            headerRight={<button>View All</button>}
+            // headerLeft={`${props.match.params.slug} mobile under ${priceRange[key]}`}
+            headerRight={
+              <MaterialButton
+                title={"VIEW ALL"}
+                style={{
+                  width: "96px",
+                }}
+                bgColor="#2874f0"
+                fontSize="12px"
+              />
+            }
             style={{
               width: "calc(100% - 40px)",
               margin: "20px",
@@ -38,7 +54,7 @@ function ProductStore() {
               {product.productsByPrice[key].map((product) => (
                 <Link
                   to={`/${product.slug}/${product._id}/p`}
-                  style={{ display: "block" }}
+                  style={{ display: "block", textDecoration: "none" }}
                   className="productContainet"
                 >
                   <div className="productImageContainer">
@@ -48,12 +64,23 @@ function ProductStore() {
                     />
                   </div>
                   <div className="productInfo">
-                    <div style={{ margin: "5px 0" }}>{product.name}</div>
+                    <div style={{ margin: "10px 0" }}>{product.name}</div>
                     <div>
-                      <span>4.3</span> &nbsp;
-                      <span>3322</span>
+                      {/* <span>4.3</span>  */}
+                      <Rating value="4.3" />
+                      &nbsp;
+                      <span
+                        style={{
+                          color: "#777",
+                          fontWeight: "500",
+                          fontSize: "12px",
+                        }}
+                      >
+                        (3322)
+                      </span>
                     </div>
-                    <div className="productPrice">{product.price}</div>
+                    {/* <div className="productPrice">{product.price}</div> */}
+                    <Price value={product.price} />
                   </div>
                 </Link>
               ))}

@@ -10,6 +10,9 @@ const initialState = {
   },
   authenticate: false,
   authenticating: false,
+  loading: false,
+  error: null,
+  message: "",
 };
 
 export default (state = initialState, action) => {
@@ -48,6 +51,16 @@ export default (state = initialState, action) => {
         ...state,
         error: action.payload.error,
         loading: false,
+      };
+      break;
+    case authConstants.SIGNUP_REQUEST:
+      break;
+    case authConstants.SIGNUP_SUCCESS:
+      break;
+    case authConstants.SIGNUP_FAILURE:
+      state = {
+        ...state,
+        error: action.payload.error,
       };
       break;
   }
